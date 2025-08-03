@@ -13,11 +13,27 @@ const db = new pg.Client({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: process.env.DB_PORT || 5432,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
 });
 
-db.connect();
+async function connectDB() {
+  try {
+    await db.connect();
+    console.log("Connected to PostgreSQL!");
+  } catch (err) {
+    console.error("Connection error:", err);
+  }
+}
 
+connectDB();
+db.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('Query error:', err);
+  } else {
+    console.log('Current time from DB:', res.rows[0]);
+  }
+});
 // Quiz data
 let quiz = [
   { country: "France", capital: "Paris" },
