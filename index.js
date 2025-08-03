@@ -124,6 +124,12 @@ app.post("/login", async (req, res) => {
     return res.status(500).render("login.ejs", { message: "Internal server error." });
   }
 });
+app.get("/logout", async(req, res) => {
+  user = 0;
+  user_name = "";
+  totalCorrect = 0;
+  res.redirect("/");
+});
 
 app.get("/quiz", async (req, res) => {
   if(user === 0) {

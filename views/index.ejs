@@ -94,6 +94,9 @@
             <h2>Game Over! Your final score is: <%= locals.totalScore %></h2>
             <a href="/" class="btn btn-primary w-100 mt-4">Home</a>
             <a href="/quiz" class="btn btn-primary w-100 mt-4">Restart</a>
+            <form action="/logout" method="GET">
+               <button type="submit" class="btn btn-primary w-100 mt-4">Log Out</button>
+            </form>
           </div>
         </main>
       `;
